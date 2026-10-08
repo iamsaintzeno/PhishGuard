@@ -42,9 +42,9 @@ Each triggered check increases the risk score. Based on the final score, the app
 - **Suspicious**: Some warning signs found
 - **Dangerous**: Multiple high-risk indicators or blocklisted domain found
 
-## Team Split
+## Work Split
 
-### Samrudhi - Frontend
+### Frontend
 
 Responsible for:
 
@@ -54,7 +54,7 @@ Responsible for:
 - Scan history table
 - User-facing layout and styling
 
-### Anushka - Backend
+### Backend
 
 Responsible for:
 
@@ -63,7 +63,7 @@ Responsible for:
 - Calculating the risk score
 - Returning verdict, score, and reasons to the frontend
 
-### Sanskar - Database
+### Database
 
 Responsible for:
 
@@ -73,7 +73,7 @@ Responsible for:
 - Queries to fetch scan history
 - Queries to check blocklisted domains
 
-### Rushi - Integration
+### Integration
 
 Responsible for:
 
