@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard - Phishing URL Detector</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🛡️ PhishGuard
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html" class="active">
+                Scanner
+            </a>
+
+            <a href="history.html">
+                Scan History
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="badge">
+                🔍 AI-Powered Security Scanner
+            </div>
+
+            <h1>
+                Detect <span>Phishing URLs</span><br>
+                Before They Trick You
+            </h1>
+
+            <p>
+                Paste a suspicious URL below and PhishGuard will analyze
+                common phishing indicators and calculate a risk score.
+            </p>
+
+        </section>
+
+
+        <!-- SCANNER CARD -->
+
+        <section class="scanner-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Scan a URL
+                    </h2>
+
+                    <p>
+                        Enter the complete URL you want to analyze.
+                    </p>
+
+                </div>
+
+
+                <div class="shield-icon">
+                    🛡️
+                </div>
+
+            </div>
+
+
+            <!-- URL INPUT -->
+
+            <div class="input-section">
+
+                <label for="urlInput">
+                    Suspicious URL
+                </label>
+
+
+                <div class="input-wrapper">
+
+                    <span class="link-icon">
+                        🔗
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="urlInput"
+                        placeholder="https://example.com/login"
+                    >
+
+                </div>
+
+
+                <small>
+                    Example: https://example.com/verify-account
+                </small>
+
+            </div>
+
+
+            <!-- SCAN BUTTON -->
+
+            <button
+                id="scanButton"
+                class="scan-btn"
+            >
+
+                <span>
+                    🔍
+                </span>
+
+                Scan URL
+
+            </button>
+
+
+            <!-- LOADING -->
+
+            <div
+                id="loading"
+                class="loading hidden"
+            >
+
+                <div class="spinner">
+                </div>
+
+                <p>
+                    Analyzing URL...
+                </p>
+
+            </div>
+
+
+            <!-- RESULT -->
+
+            <div
+                id="result"
+                class="result hidden"
+            >
+
+
+                <!-- RESULT TOP -->
+
+                <div class="result-top">
+
+
+                    <div>
+
+                        <p class="result-label">
+                            Security Verdict
+                        </p>
+
+
+                        <h2 id="verdict">
+                            Safe
+                        </h2>
+
+                    </div>
+
+
+                    <!-- SCORE -->
+
+                    <div
+                        id="scoreCircle"
+                        class="score-circle"
+                    >
+
+                        <span id="score">
+                            0
+                        </span>
+
+                        <small>
+                            /100
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RISK BAR -->
+
+                <div class="risk-bar">
+
+                    <div
+                        id="riskProgress"
+                        class="risk-progress"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- REASONS -->
+
+                <div class="reasons-section">
+
+                    <h3>
+                        Why was this URL flagged?
+                    </h3>
+
+
+                    <div id="reasons">
+                    </div>
+
+                </div>
+
+
+                <!-- SCANNED URL -->
+
+                <div class="scanned-url">
+
+                    <strong>
+                        Scanned URL
+                    </strong>
+
+
+                    <p id="scannedUrl">
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FEATURES -->
+
+        <section class="features">
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔒
+                </div>
+
+                <h3>
+                    HTTPS Check
+                </h3>
+
+                <p>
+                    Detects websites that don't use secure HTTPS connections.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    Domain Analysis
+                </h3>
+
+                <p>
+                    Checks IP addresses, subdomains and suspicious URL structure.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Risk Detection
+                </h3>
+
+                <p>
+                    Identifies common phishing keywords and suspicious patterns.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            🛡️ PhishGuard • Frontend Demo
+        </p>
+
+    </footer>
+
+
+    <!-- IMPORTANT: JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

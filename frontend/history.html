@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>PhishGuard - Scan History</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🛡️ PhishGuard
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Scanner
+            </a>
+
+            <a href="history.html" class="active">
+                Scan History
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <section class="hero">
+
+            <div class="badge">
+                📋 Security Records
+            </div>
+
+            <h1>
+                Scan <span>History</span>
+            </h1>
+
+            <p>
+                View URLs that have previously been analyzed
+                by PhishGuard.
+            </p>
+
+        </section>
+
+
+        <!-- HISTORY CARD -->
+
+        <section class="scanner-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Previous Scans
+                    </h2>
+
+                    <p>
+                        Your scan history is stored locally
+                        in this browser.
+                    </p>
+
+                </div>
+
+                <button
+                    onclick="clearHistory()"
+                    class="scan-btn"
+                    style="width:auto; margin:0; padding:12px 20px;"
+                >
+                    Clear History
+                </button>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div style="overflow-x:auto;">
+
+                <table
+                    id="historyTable"
+                    style="
+                        width:100%;
+                        border-collapse:collapse;
+                    "
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th style="
+                                text-align:left;
+                                padding:14px;
+                                border-bottom:2px solid #e5e7eb;
+                            ">
+                                URL
+                            </th>
+
+                            <th style="
+                                text-align:center;
+                                padding:14px;
+                                border-bottom:2px solid #e5e7eb;
+                            ">
+                                Score
+                            </th>
+
+                            <th style="
+                                text-align:center;
+                                padding:14px;
+                                border-bottom:2px solid #e5e7eb;
+                            ">
+                                Verdict
+                            </th>
+
+                            <th style="
+                                text-align:right;
+                                padding:14px;
+                                border-bottom:2px solid #e5e7eb;
+                            ">
+                                Time
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="historyBody">
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="emptyHistory"
+                style="
+                    text-align:center;
+                    padding:50px 20px;
+                    color:#64748b;
+                "
+            >
+
+                <div style="font-size:40px;">
+                    🔍
+                </div>
+
+                <h3 style="margin:10px 0;">
+                    No scans yet
+                </h3>
+
+                <p>
+                    Scan your first URL to see it here.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            🛡️ PhishGuard &nbsp;•&nbsp; Frontend Demo
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        loadHistory();
+
+
+        function loadHistory() {
+
+            const history =
+                JSON.parse(
+                    localStorage.getItem("scanHistory")
+                ) || [];
+
+
+            const body =
+                document.getElementById("historyBody");
+
+            const empty =
+                document.getElementById("emptyHistory");
+
+
+            body.innerHTML = "";
+
+
+            if (history.length === 0) {
+
+                empty.style.display = "block";
+
+                return;
+
+            }
+
+
+            empty.style.display = "none";
+
+
+            history.forEach(function(scan) {
+
+                const row =
+                    document.createElement("tr");
+
+
+                let verdictColor;
+
+
+                if (scan.verdict === "Safe") {
+
+                    verdictColor = "#16a34a";
+
+                }
+                else if (scan.verdict === "Suspicious") {
+
+                    verdictColor = "#d97706";
+
+                }
+                else {
+
+                    verdictColor = "#dc2626";
+
+                }
+
+
+                row.innerHTML = `
+
+                    <td style="
+                        padding:14px;
+                        border-bottom:1px solid #e5e7eb;
+                        max-width:400px;
+                        word-break:break-all;
+                    ">
+                        ${escapeHTML(scan.url)}
+                    </td>
+
+                    <td style="
+                        padding:14px;
+                        text-align:center;
+                        border-bottom:1px solid #e5e7eb;
+                        font-weight:bold;
+                    ">
+                        ${scan.score}/100
+                    </td>
+
+                    <td style="
+                        padding:14px;
+                        text-align:center;
+                        border-bottom:1px solid #e5e7eb;
+                        color:${verdictColor};
+                        font-weight:bold;
+                    ">
+                        ${escapeHTML(scan.verdict)}
+                    </td>
+
+                    <td style="
+                        padding:14px;
+                        text-align:right;
+                        border-bottom:1px solid #e5e7eb;
+                        color:#64748b;
+                        white-space:nowrap;
+                    ">
+                        ${escapeHTML(scan.time)}
+                    </td>
+
+                `;
+
+
+                body.appendChild(row);
+
+            });
+
+        }
+
+
+        function clearHistory() {
+
+            const confirmDelete =
+                confirm(
+                    "Are you sure you want to clear all scan history?"
+                );
+
+
+            if (confirmDelete) {
+
+                localStorage.removeItem("scanHistory");
+
+                loadHistory();
+
+            }
+
+        }
+
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
