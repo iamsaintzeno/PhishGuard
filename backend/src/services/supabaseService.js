@@ -184,7 +184,7 @@ async function getScanHistory(limit = 50) {
       const { data, error } = await supabase
         .from('scans')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('scanned_at', { ascending: false })
         .limit(limit);
 
       if (error) {
